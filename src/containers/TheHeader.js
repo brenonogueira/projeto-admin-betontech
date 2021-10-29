@@ -50,7 +50,7 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo"/>
+      <img src="/logo-2.svg"   height="48" width="100%" style={{marginLeft:'-70px'}}/>
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
@@ -66,7 +66,7 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-5">
-         {/* <TheHeaderDropdownNotif/>
+        {/* <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/> */}
         <TheHeaderDropdown/> 

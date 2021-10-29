@@ -28,16 +28,8 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch(sidebarActions.set({ sidebarShow: val }))}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
-        <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
-        />
+        <img src="/logo.svg" width="500" height="37" alt="logo" style={{marginRight:'150px'}}/>
+        {/* <img src="/logo-2.svg" width="35" height="35" className="c-sidebar-brand-minimized" alt="logo"/> */}
       </CSidebarBrand>
       <CSidebarNav>
 
