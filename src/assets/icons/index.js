@@ -1,6 +1,5 @@
 import { sygnet } from './sygnet'
 
-
 import {
   cibSkype,
   cibFacebook,
