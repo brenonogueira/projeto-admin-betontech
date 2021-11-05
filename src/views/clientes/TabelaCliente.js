@@ -18,7 +18,6 @@ export default function TabelaCliente() {
   const fields = [
     { key: "nome", _style: { width: "20%" } },
     { key: "cnpj", _style: { width: "5%" } },
-    { key: "rua", _style: { width: "20%" } },
 
     {
       key: "show_details",
@@ -156,10 +155,7 @@ export default function TabelaCliente() {
               <CDataTable
                 items={usersData}
                 fields={fields}
-                itemsPerPageSelect
-                itemsPerPage={5}
                 hover
-                sorter
                 responsive
                 pagination
                 scopedSlots={{
@@ -180,7 +176,7 @@ export default function TabelaCliente() {
                             toggleDetails(index);
                           }}
                         >
-                          {details.includes(index) ? "Hide" : "Show"}
+                          {details.includes(index) ? "Ocultar" : "Mostrar"}
                         </CButton>
                       </td>
                     );
