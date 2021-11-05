@@ -15,7 +15,13 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Cadastrar Cliente',
     to: '/cadastro-cliente',
-    icon: 'cil-pencil'
+    icon: 'cil-address-book'
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Tabela Cliente',
+    to: '/cliente',
+    icon: 'cil-address-book'
   },
   {
     _tag: 'CSidebarNavItem',

@@ -125,12 +125,14 @@ import {
   cilUserUnfollow,
   cilX,
   cilXCircle,
-  cilWarning
+  cilWarning,
+  cilAddressBook,
 } from '@coreui/icons'
 
 export const icons = Object.assign({}, {
   sygnet,
 }, {
+  cilAddressBook,
   cilAlignCenter,
   cilAlignLeft,
   cilAlignRight,
