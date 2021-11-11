@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 export default function useAuth() {
   const dispatch = useDispatch();
 
-  const fn_login = (email, senha) => {
-    axios.post(api_login, {email,  senha}, {  headers: {'Content-Type': 'application/json'}})
+  const fn_login = (email, password) => {
+    axios.post(api_login, {email,  password}, {  headers: {'Content-Type': 'application/json'}})
     .then((res) => {
         sessionStorage.setItem('token', res.data.token);
         dispatch(authActions.login(res.data.user))

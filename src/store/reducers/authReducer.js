@@ -1,7 +1,7 @@
 export const initialState = {
   isLogged: false,
   user: null,
-  expire: null,
+
 };
 
 const authReducer = (state = initialState, action) => {
@@ -11,14 +11,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isLogged: true,
         user: action.payload,
-        expire: action.payload.exp,
       };
     case "LOGOUT":
       return {
         ...state,
         isLogged: false,
         user: null,
-        expire: null,
+
       };
 
     default:

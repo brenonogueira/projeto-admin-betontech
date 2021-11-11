@@ -18,8 +18,23 @@ import {
   CLabel,
   CRow,
 } from "@coreui/react";
+import moment from "moment";
 
 const Cadastro = () => {
+
+  const calculaDataRuptura = (data, diasSoma) => {
+    const dataMoldagem = new Date(data);
+    var dataRuptura = moment(dataMoldagem, "D/M/YYYY").add("day", diasSoma);
+    var dataRupturaISO = dataRuptura.toDate().toISOString();
+    const dataRupturaFormatada = moment.utc(dataRupturaISO).format("D/MM/YYYY");
+    return dataRupturaFormatada;
+  };
+
+  const calculaFck = (carga) => {
+    const fck = (carga / 78.54) * 100;
+    return  parseInt(fck);
+  };
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -176,6 +191,10 @@ const Cadastro = () => {
                         </CFormGroup>
                       </CCol>
                     </CFormGroup>
+                    <CFormGroup>
+                      <CLabel>Obs</CLabel>
+                      <CInput placeholder="Obs" />
+                    </CFormGroup>
                   </CCardBody>
                 </CCardBody>
               </CCol>
@@ -292,10 +311,7 @@ const Cadastro = () => {
                         </CFormGroup>
                       </CCol>
                     </CFormGroup>
-                    <CFormGroup>
-                      <CLabel>Obs</CLabel>
-                      <CInput placeholder="Obs" />
-                    </CFormGroup>
+                   
                   </CCardBody>
                 </CCardBody>
               </CCol>

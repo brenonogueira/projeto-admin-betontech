@@ -40,6 +40,8 @@ const Login = () => {
     // console.log("chegou aqui ");
     if (rd_auth?.isLogged === true) {
       history.push("/");
+    } else {
+      history.push("/login");
     }
   }, [rd_auth]);
 
