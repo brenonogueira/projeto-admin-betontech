@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-
 import {
   CButton,
   CCard,
@@ -18,22 +17,72 @@ import {
   CLabel,
   CRow,
 } from "@coreui/react";
-import moment from "moment";
+import { calculaDataRuptura } from "src/utils/calculaDataRuptura";
+import { calculaFck } from "src/utils/calculaFck";
+import { useFormik } from "formik";
+import axios from "axios";
+import { cliente } from "src/services/api";
+import { toast } from "react-toastify";
 
 const Cadastro = () => {
-
-  const calculaDataRuptura = (data, diasSoma) => {
-    const dataMoldagem = new Date(data);
-    var dataRuptura = moment(dataMoldagem, "D/M/YYYY").add("day", diasSoma);
-    var dataRupturaISO = dataRuptura.toDate().toISOString();
-    const dataRupturaFormatada = moment.utc(dataRupturaISO).format("D/MM/YYYY");
-    return dataRupturaFormatada;
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
   };
 
-  const calculaFck = (carga) => {
-    const fck = (carga / 78.54) * 100;
-    return  parseInt(fck);
+  const cadastraCliente = () => {
+    console.log(formik.values)
+    axios.post(
+      cliente,
+      {
+        nome: formik.values.nome_cliente,
+        cnpj: formik.values.cnpj_cliente,
+        rua: formik.values.rua_cliente,
+        bairro: formik.values.bairro_cliente,
+        cidade: formik.values.cidade_cliente,
+        numero: formik.values.numero_end_cliente,
+        cep: formik.values.cep_cliente,
+        obra: formik.values.obra_cliente,
+        contrato: formik.values.contrato_cliente,
+        telefone: formik.values.telefone_cliente,
+      },
+      {
+        headers,
+      }
+    ).then((res) => {
+      console.log(res.data)
+      // setIdOcorrencia(res.data.id);
+      console.log("criado com sucesso");
+      // getUser(profile_api);
+      // dispatch(ocorrenciasActions.index_ocorrencia_unidade(usuarioID))
+      toast.success("Cliente cadastrado com sucesso!", { autoClose: 2000 });
+    }).catch((err) => {
+      console.log(err);
+      toast.error("Erro ao registrar a cliente. Tente novamente", { autoClose: 2000 });
+    });
+;
   };
+
+  const formik = useFormik({
+    initialValues: {
+      nome_cliente: "",
+      cnpj_cliente: "",
+      rua_cliente: "",
+      bairro_cliente: "",
+      numero_end_cliente: "",
+      cidade_cliente: "",
+      cep_cliente: "",
+      obra_cliente: "",
+      contrato_cliente: "",
+      telefone_cliente: "",
+    },
+  });
+
+  //  useEffect(() => {
+  //     console.log(calculaDataRuptura('2021-11-11', 3))
+  //     console.log(calculaFck(15))
+  //  }, [])
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -58,7 +107,7 @@ const Cadastro = () => {
       case 0:
         return (
           <CRow>
-            <CCol xs="12" sm="6" lg="12">
+            <CCol xs="12" sm="12" lg="12">
               <CCardHeader>
                 <small> Cliente</small>
               </CCardHeader>
@@ -67,13 +116,13 @@ const Cadastro = () => {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel>Nome</CLabel>
-                      <CInput placeholder="Nome da Empresa" />
+                      <CInput placeholder="Nome da Empresa"   {...formik.getFieldProps("nome_cliente")} />
                     </CFormGroup>
                   </CCol>
                   <CCol xs="6" md="6">
                     <CFormGroup>
                       <CLabel>CNPJ</CLabel>
-                      <CInput placeholder="00.000.000/0000-00" />
+                      <CInput placeholder="00.000.000/0000-00"  {...formik.getFieldProps("cnpj_cliente")} />
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
@@ -81,56 +130,54 @@ const Cadastro = () => {
                   <CCol xs="8">
                     <CFormGroup>
                       <CLabel>Rua</CLabel>
-                      <CInput placeholder="Rua" />
+                      <CInput placeholder="Rua" {...formik.getFieldProps("rua_cliente")} />
                     </CFormGroup>
                   </CCol>
                   <CCol xs="4">
                     <CFormGroup>
                       <CLabel>Número</CLabel>
-                      <CInput placeholder="Número" />
+                      <CInput placeholder="Número" {...formik.getFieldProps("numero_end_cliente")} />
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
 
                 <CFormGroup>
                   <CLabel>Bairro</CLabel>
-                  <CInput placeholder="Bairro" />
+                  <CInput placeholder="Bairro" {...formik.getFieldProps("bairro_cliente")} />
                 </CFormGroup>
                 <CFormGroup row className="my-0">
                   <CCol xs="8">
                     <CFormGroup>
                       <CLabel>Cidade</CLabel>
-                      <CInput placeholder="Cidade" />
+                      <CInput placeholder="Cidade" {...formik.getFieldProps("cidade_cliente")} />
                     </CFormGroup>
                   </CCol>
                   <CCol xs="4">
                     <CFormGroup>
                       <CLabel>CEP</CLabel>
-                      <CInput placeholder="CEP" />
+                      <CInput placeholder="CEP" {...formik.getFieldProps("cep_cliente")} />
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup>
                   <CLabel>Obra</CLabel>
-                  <CInput placeholder="Obra" />
+                  <CInput placeholder="Obra" {...formik.getFieldProps("obra_cliente")} />
                 </CFormGroup>
                 <CFormGroup>
                   <CLabel>Contrato</CLabel>
-                  <CInput placeholder="Contrato" />
+                  <CInput placeholder="Contrato" {...formik.getFieldProps("contrato_cliente")} />
                 </CFormGroup>
                 <CFormGroup>
                   <CLabel>Telefone</CLabel>
-                  <CInput placeholder="Telefone" />
+                  <CInput placeholder="Telefone" {...formik.getFieldProps("telefone_cliente")} />
                 </CFormGroup>
               </CCardBody>
             </CCol>
           </CRow>
-
-
         );
       case 1:
         return (
-          <CCol xs="12" sm="6" lg="12">
+          <CCol xs="12" sm="12" lg="12">
             <CRow>
               <CCol xs="12" sm="12" xl="12" lg="12" md="12">
                 <CCardBody>
@@ -152,7 +199,6 @@ const Cadastro = () => {
                         </CFormGroup>
                       </CCol>
                     </CFormGroup>
-
 
                     <CFormGroup>
                       <CLabel>Série</CLabel>
@@ -311,7 +357,6 @@ const Cadastro = () => {
                         </CFormGroup>
                       </CCol>
                     </CFormGroup>
-                   
                   </CCardBody>
                 </CCardBody>
               </CCol>
@@ -326,9 +371,12 @@ const Cadastro = () => {
   const steps = getSteps();
 
   return (
-
     <CContainer>
-      <Stepper style={{ width: '10px', height: '25px', marginTop: '-25px' }} activeStep={activeStep} alternativeLabel>
+      <Stepper
+        style={{ width: "10px", height: "25px", marginTop: "-25px" }}
+        activeStep={activeStep}
+        alternativeLabel
+      >
         {steps.map((aba) => (
           <Step key={aba}>
             <StepLabel>{aba}</StepLabel>
@@ -344,25 +392,34 @@ const Cadastro = () => {
         <CCard>
           {getStepContent(activeStep)}
           <CCardFooter>
-            <CButton onClick={handleBack} disabled={activeStep === 0}>
+            <CButton onClick={handleBack} disabled={activeStep === 0 }>
               Voltar
             </CButton>
-            <CButton onClick={handleNext} variant="" className="bg-gray-900">
-              {" "}
-              {"teste"}
+            <CButton onClick={() => {
+              handleNext();
+              if(activeStep === 0 ) {
+                cadastraCliente()
+              } else if (activeStep === 1) {
+                handleNext();
+                // cadastraRelatorio()
+              } else if ( activeStep === 2) {
+                handleNext();
+                // cadastraTeste()
+              }
+              }} variant="" className="bg-gray-900" disabled={formik.values.telefone_cliente === ""}>
+                Cadastrar
             </CButton>
             <CButton
-              onClick={""}
+              href="/dashboard"
               variant=""
               className="bg-gray-900 float-right "
             >
-              Finalizar
+              Cancelar
             </CButton>
           </CCardFooter>
         </CCard>
       )}
     </CContainer>
-
   );
 };
 

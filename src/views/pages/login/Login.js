@@ -18,7 +18,7 @@ import {
 import CIcon from "@coreui/icons-react";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
-import useAuth from "src/hooks/useAuth";
+import {useAuth}  from "src/hooks/useAuth";
 
 const Login = () => {
   const history = useHistory();

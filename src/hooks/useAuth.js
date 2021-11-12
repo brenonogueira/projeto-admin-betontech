@@ -3,11 +3,12 @@ import axios from "axios";
 import authActions from "src/store/actions/authActions";
 import { api_login } from "src/services/api";
 import { useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-export default function useAuth() {
+export function useAuth() {
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  
   const fn_login = (email, password) => {
     axios.post(api_login, {email,  password}, {  headers: {'Content-Type': 'application/json'}})
     .then((res) => {
@@ -19,7 +20,7 @@ export default function useAuth() {
   const fn_logout = () => {
     dispatch(authActions.logout());
     sessionStorage.removeItem('token');
-    // history.push("/login")
+    history.push("/login")
   };
 
 

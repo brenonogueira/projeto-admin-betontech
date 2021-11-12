@@ -8,30 +8,10 @@ const _nav =  [
     to: '/dashboard',
   },
   {
-    _tag: 'CSidebarNavTitle',
-    _children: ['Cliente']
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Cadastrar Cliente',
-    to: '/cadastro-cliente',
-    icon: 'cil-address-book'
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Tabela Cliente',
-    to: '/cliente',
-    icon: 'cil-address-book'
-  },
-  {
     _tag: 'CSidebarNavItem',
     name: 'Listar Clientes',
     to: '/clientes',
-    icon: 'cil-pencil',
-  },
-  {
-    _tag: 'CSidebarNavTitle',
-    _children: ['Components']
+    icon: 'cil-address-book',
   },
   {
     _tag: 'CSidebarNavItem',
@@ -39,6 +19,8 @@ const _nav =  [
     to: '/cadastro',
     icon: 'cil-pencil',
   },
+ 
+
 ]
 
 export default _nav

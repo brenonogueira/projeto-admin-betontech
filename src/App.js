@@ -6,9 +6,9 @@ import {
   Redirect,
   // useLocation,
 } from "react-router-dom";
-
+import { ToastContainer } from "react-toastify";
 import "./scss/style.scss";
-
+import "react-toastify/dist/ReactToastify.css";
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -53,7 +53,18 @@ const App = () => {
             name="Page 500"
             render={(props) => <Page500 {...props} />}
           />
-          <Route path="/" name="Home" render={props => (sessionStorage.getItem('token') ? <TheLayout {...props}/> : <Redirect to ="/login" /> )} />
+          <ToastContainer autoClose={3000} />
+          <Route
+            path="/"
+            name="Home"
+            render={(props) =>
+              sessionStorage.getItem("token") ? (
+                <TheLayout {...props} />
+              ) : (
+                <Redirect to="/login" />
+              )
+            }
+          />
           {/* <Route
             path="/"
             name="Home"

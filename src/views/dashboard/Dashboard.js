@@ -1,25 +1,45 @@
-import React, { useEffect } from "react";
-import // CBadge,
-// CButton,
-// CButtonGroup,
-// CCard,
-// CCardBody,
-// CCardFooter,
-// CCardHeader,
-// CCol,
-// CProgress,
-// CRow,
-// CCallout
-"@coreui/react";
-// import CIcon from '@coreui/icons-react'
-
+import React, { useEffect, useState } from "react";
+import {
+  CCardGroup,
+  CCardFooter,
+  CCol,
+  CLink,
+  CRow,
+  CWidgetProgress,
+  CWidgetIcon,
+  CWidgetProgressIcon,
+  CWidgetSimple,
+  CProgress,
+} from '@coreui/react'
+import CIcon from "@coreui/icons-react";
+import { cliente } from "src/services/api";
+import axios from "axios";
 
 const Dashboard = () => {
- 
+  const [clientes, setClientes] = useState([]);
+
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+  };
+
+  useEffect(() => {
+    axios.get(cliente, { headers }).then((res) => {
+        setClientes(res.data)
+        console.log(clientes)
+    });
+  }, [cliente]);
 
   return (
     <>
-      {/* <button onClick={calculaDataRuptura("2021-11-10")}> RUPTURA</button> */}
+       <CWidgetProgressIcon
+          header={clientes?.length}
+          text="Clientes"
+          color="gradient-success"
+        >
+          <CIcon name="cil-userFollow" height="36"/>
+        </CWidgetProgressIcon>
     </>
   );
 };
