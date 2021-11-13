@@ -106,11 +106,10 @@ const Login = () => {
               >
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Cadastre-se</h2>
+                    <h2>BETONTECH</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
+                      É nosso trabalho, todos os dias, tornar cada aspecto importante da experiência 
+                      do cliente um pouco melhor.
                     </p>
                     <Link to="/register">
                       <CButton
@@ -119,7 +118,7 @@ const Login = () => {
                         active
                         tabIndex={-1}
                       >
-                        Cadastre-se agora
+                        Cadastrar funiconário
                       </CButton>
                     </Link>
                   </div>

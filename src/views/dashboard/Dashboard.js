@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   return (
     <>
-       <CWidgetProgressIcon
+        <CWidgetProgressIcon
           header={clientes?.length}
           text="Clientes"
           color="gradient-success"
