@@ -9,10 +9,18 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { cliente } from "src/services/api";
+import CIcon from "@coreui/icons-react";
+import ModalRelatorio from "./ModalRelatorio";
 
 export default function Clientes() {
   const [clientes, setClientes] = useState([]);
   const [details, setDetails] = useState([])
+  const [relatorio, setRelatorio] = useState([])
+  const [modalOpen, setModalOpen] = useState(false)
+  const [clienteRelatorio, setClienteRelatorio] = useState({
+    id_cliente: null,
+    nome_cliente: null
+  })
 
   const headers = {
     Accept: "application/json",
@@ -22,8 +30,8 @@ export default function Clientes() {
 
   useEffect(() => {
     axios.get(cliente, { headers }).then((res) => {
-        setClientes(res.data)
-        console.log(clientes)
+      setClientes(res.data)
+      console.log(clientes)
     });
   }, [cliente]);
 
@@ -55,7 +63,8 @@ export default function Clientes() {
     },
 
     { key: 'acoes', label: "Ações", _style: { width: '10%' } },
-   
+    { key: 'relatorio', label: "Relatório", _style: { width: '10%' } },
+
   ];
 
   const toggleDetails = (index) => {
@@ -106,24 +115,48 @@ export default function Clientes() {
             scopedSlots={
               {
                 acoes: (item, index) => {
-                    return (
-                      <td className="py-2">
-                        <CButton
-                          color="primary"
-                          variant="outline"
-                          shape="square"
-                          size="sm"
-                          onClick={() => { toggleDetails(index);  }}
-                        >
-                          {details.includes(index) ? 'OCULTAR' : 'MOSTRAR'}
-                        </CButton>
-                      </td>
-                    )
-                  },
-  
+                  return (
+                    <td className="py-2">
+                      <CButton
+                        color="primary"
+                        variant="outline"
+                        shape="square"
+                        size="sm"
+                        onClick={() => { toggleDetails(index); }}
+                      >
+                        {details.includes(index) ? 'OCULTAR' : 'MOSTRAR'}
+                      </CButton>
+                    </td>
+                  )
+                },
+
+                relatorio: (item, index) => {
+                  return (
+                    <td className="py-2" style={{ textAlign: 'center' }}>
+                      <CButton
+                        color="primary"
+                        variant="outline"
+                        shape="square"
+                        size="sm"
+                        onClick={() => {
+                          console.log(item);
+                          setModalOpen(true);
+                          setClienteRelatorio({
+                            id_cliente: item.id,
+                            nome_cliente: item.nome
+                          })
+                        }}
+                      >
+                        <CIcon name="cil-clipboard" alt="Settings" />
+                      </CButton>
+                    </td>
+                  )
+                },
+
+
                 //mostrar os detalhes da ocorrencia
                 details: (item, index) => {
-                    console.log(item)
+                  // console.log(item)
                   return (
                     <CCollapse show={details.includes(index)}>
                       <CCardBody>
@@ -131,9 +164,9 @@ export default function Clientes() {
                         <p> {` Rua: ${item.endereco?.rua}, Bairro: ${item.endereco?.bairro}, Número: ${item.endereco?.numero} `}</p>
                         <p> {` Cidade: ${item.endereco?.cidade}, Estado: ${item.endereco?.estado}, CEP: ${item.endereco?.cep} `}</p>
                         <p className="text-muted">
-                   
+
                         </p>
-                       
+
                       </CCardBody>
                     </CCollapse>
                   );
@@ -143,6 +176,7 @@ export default function Clientes() {
           />
         </CCardBody>
       </CCard>
+      <ModalRelatorio modalOpen={modalOpen} setModalOpen={setModalOpen} clienteRelatorio={clienteRelatorio} />
     </>
   );
 }
