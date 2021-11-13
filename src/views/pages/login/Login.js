@@ -67,7 +67,7 @@ const Login = () => {
                       </CInputGroupPrepend>
                       <CInput
                         type="email"
-                        placeholder="email"
+                        placeholder="E-mail"
                         autoComplete="email"
                         {...formik.getFieldProps("email")}
                       />
@@ -80,7 +80,7 @@ const Login = () => {
                       </CInputGroupPrepend>
                       <CInput
                         type="password"
-                        placeholder="Password"
+                        placeholder="Senha"
                         autoComplete="current-password"
                         {...formik.getFieldProps("password")}
                       />

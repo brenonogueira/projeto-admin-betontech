@@ -311,7 +311,6 @@ const Cadastro = () => {
                         </CFormGroup>
                       </CCol>
                     </CFormGroup>
-                   
                   </CCardBody>
                 </CCardBody>
               </CCol>
