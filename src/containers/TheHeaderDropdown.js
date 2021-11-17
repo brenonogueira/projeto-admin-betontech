@@ -9,6 +9,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 
 const TheHeaderDropdown = () => {
@@ -17,7 +18,6 @@ const TheHeaderDropdown = () => {
   const logout_nav = () => {
     autentica.fn_logout();
   };
-
 
   return (
     <CDropdown
@@ -45,9 +45,11 @@ const TheHeaderDropdown = () => {
           <strong>Account</strong>
         </CDropdownItem>
       
-        <CDropdownItem>
-          <CIcon name="cil-user" className="mfe-2" />Profile
+       
+        <CDropdownItem >
+        <Link to="/alterar-senha" style={{color: '#8a93a2'}}> <CIcon name="cil-user" className="mfe-2" />Alterar Senha  </Link>
         </CDropdownItem>
+       
        
         <CDropdownItem divider />
         <CDropdownItem onClick={logout_nav}>

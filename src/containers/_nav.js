@@ -19,6 +19,12 @@ const _nav =  [
     to: '/cadastro',
     icon: 'cil-pencil',
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Alterar Senha',
+    to: '/alterar-senha',
+    icon: 'cil-asterisk',
+  },
  
 
 ]
