@@ -24,11 +24,12 @@ import { calculaDataRuptura } from "src/utils/calculaDataRuptura";
 import { calculaFck } from "src/utils/calculaFck";
 import { useFormik } from "formik";
 import axios from "axios";
-import { relatorio } from "src/services/api";
+import { cliente_relatorio, relatorio } from "src/services/api";
 import { toast } from "react-toastify";
 
 const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
   const [id_relatorio, setId_Relatorio] = useState(null)
+  // const [token, setToken] = useState(null)
 
   const close_modal = () => {
     setModalOpen(false)
@@ -38,6 +39,19 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
     Accept: "application/json",
     "Content-Type": "application/json",
     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+  };
+
+  const getRelatorio = (token) => {
+    axios
+      .get("http://191.252.193.237:3333/v1/cliente/relatorio/", {
+        headers: {
+          "x-token": token,
+        },
+      })
+      .then((res) => {
+        // setRelatorio(res.data[0])
+        console.log(res.data);
+      });
   };
 
   const cadastraRelatorio = () => {
@@ -58,10 +72,12 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
         headers,
       }
     ).then((res) => {
-      console.log(res.data)
+      console.log(res.data.token)
       setId_Relatorio(res.data.id)
+      // setToken(res.data.token)
       console.log("criado com sucesso");
       // getUser(profile_api);
+      getRelatorio(res.data.token)
       // dispatch(ocorrenciasActions.index_ocorrencia_unidade(usuarioID))
       toast.success("Relatório cadastrado com sucesso!", { autoClose: 2000 });
     }).catch((err) => {
@@ -83,10 +99,18 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
     },
   });
 
-  //  useEffect(() => {
-  //     console.log(calculaDataRuptura('2021-11-11', 3))
-  //     console.log(calculaFck(15))
-  //  }, [])
+  // useEffect(() => {
+  //   axios
+  //   .get(cliente_relatorio, {
+  //     headers: {
+  //       "x-token": token,
+  //     },
+  //   })
+  //   .then((res) => {
+  //     setRelatorio(res.data[0])
+  //     console.log(res.data);
+  //   });
+  // }, [])
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -182,117 +206,7 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
       case 1:
         return (
           <CContainer fluid>
-            <CRow>
-              <CCol xs="12" sm="12" xl="12" lg="12" md="12">
-                <CCardBody>
-                  <CCardHeader>
-                    <small>Teste</small>
-                  </CCardHeader>
-                  <CCardBody>
-                    <CFormGroup row className="my-0">
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel htmlFor="city">Lab</CLabel>
-                          <CInput placeholder="Lab" />
-                        </CFormGroup>
-                      </CCol>
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>Nota</CLabel>
-                          <CInput placeholder="Nota" />
-                        </CFormGroup>
-                      </CCol>
-                    </CFormGroup>
-                    <CFormGroup row className="my-0">
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>fckProj</CLabel>
-                          <CInput placeholder="fckProj" />
-                        </CFormGroup>
-                      </CCol>
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>Responsável</CLabel>
-                          <CInput placeholder="Responsável" />
-                        </CFormGroup>
-                      </CCol>
-                    </CFormGroup>
-                    <CFormGroup row className="my-0">
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>Moldagem</CLabel>
-                          <CInput
-                            type="date"
-                            id="date-input"
-                            name="date-input"
-                            placeholder="moldagem"
-                          />
-                        </CFormGroup>
-                      </CCol>
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>Ruptura</CLabel>
-                          <CInput
-                            type="date"
-                            id="date-input"
-                            name="date-input"
-                            placeholder="ruptura"
-                          />
-                        </CFormGroup>
-                      </CCol>
-                    </CFormGroup>
-                    <CFormGroup row className="my-0">
-                      <CCol xs="4">
-                        <CFormGroup>
-                          <CLabel>Idade</CLabel>
-                          <CInput placeholder="Idade" />
-                        </CFormGroup>
-                      </CCol>
-                      <CCol xs="4">
-                        <CFormGroup>
-                          <CLabel>Slump</CLabel>
-                          <CInput placeholder="Slump" />
-                        </CFormGroup>
-                      </CCol>
-                      <CCol xs="4">
-                        <CFormGroup>
-                          <CLabel>Hora</CLabel>
-                          <CInput placeholder="Hora" />
-                        </CFormGroup>
-                      </CCol>
-                    </CFormGroup>
-                    <CFormGroup row className="my-0">
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>Local</CLabel>
-                          <CInput placeholder="Local" />
-                        </CFormGroup>
-                      </CCol>
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>Peça</CLabel>
-                          <CInput placeholder="Peça" />
-                        </CFormGroup>
-                      </CCol>
-                    </CFormGroup>
-                    <CFormGroup row className="my-0">
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>Carga</CLabel>
-                          <CInput placeholder="Local" />
-                        </CFormGroup>
-                      </CCol>
-                      <CCol xs="6">
-                        <CFormGroup>
-                          <CLabel>FCK</CLabel>
-                          <CInput placeholder="FCK" />
-                        </CFormGroup>
-                      </CCol>
-                    </CFormGroup>
-                  </CCardBody>
-                </CCardBody>
-              </CCol>
-            </CRow>
+            a
           </CContainer>
         );
       default:

@@ -19,6 +19,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { cliente } from "src/services/api";
 import { toast } from "react-toastify";
+import {Redirect} from 'react-router-dom'
 
 const Cadastro = () => {
 
@@ -54,6 +55,7 @@ const Cadastro = () => {
       // getUser(profile_api);
       // dispatch(ocorrenciasActions.index_ocorrencia_unidade(usuarioID))
       toast.success("Cliente cadastrado com sucesso!", { autoClose: 2000 });
+      <Redirect to="/clientes" />
     }).catch((err) => {
       console.log(err);
       toast.error("Erro ao registrar a cliente. Tente novamente", { autoClose: 2000 });
