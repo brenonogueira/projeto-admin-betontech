@@ -214,6 +214,8 @@ export default function TabelaCliente() {
                               hover
                               striped
                               bordered
+                              sorter={true}
+                              columnFilter
                               responsive
                               size="sm"
                               itemsPerPage={10}

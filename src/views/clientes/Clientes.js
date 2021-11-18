@@ -39,31 +39,31 @@ export default function Clientes() {
     {
       key: "nome",
       label: "NOME",
-      _style: { width: "2%" },
+      _style: { width: "5%", textAlign: 'center' },
     },
     {
       key: "cnpj",
       label: "CNPJ",
-      _style: { width: "10%" },
+      _style: { width: "10%", textAlign: 'center' },
     },
     {
       key: "obra",
       label: "OBRA",
-      _style: { width: "15%" },
+      _style: { width: "10%", textAlign: 'center' },
     },
     {
       key: "telefone",
       label: "TELEFONE",
-      _style: { width: "20%" },
+      _style: { width: "10%", textAlign: 'center' },
     },
     {
       key: "contrato",
       label: "CONTRATO",
-      _style: { width: "5%" },
+      _style: { width: "2%", textAlign: 'center' },
     },
 
-    { key: 'acoes', label: "Ações", _style: { width: '10%' } },
-    { key: 'relatorio', label: "Relatório", _style: { width: '10%' } },
+    { key: 'relatorio', label: "Ações", _style: { width: '13%', textAlign: 'center' } },
+    { key: 'acoes', label: "", _style: { width: '4%' } },
 
   ];
 
@@ -77,6 +77,12 @@ export default function Clientes() {
     }
     setDetails(newDetails)
   }
+
+  const ordenarClientes = clientes?.sort(function (a, b) {
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+
+  console.log(ordenarClientes)
 
 
   return (
@@ -102,7 +108,7 @@ export default function Clientes() {
               <CButton onClick={openModalCreate} className="bg-gray-900" variant="outline" size="lg">Adicionar Nova Ocorrência</CButton>
             </div> */}
           <CDataTable
-            items={clientes}
+            items={ordenarClientes}
             fields={fields}
             tableFilter={{ label: "Filtrar", placeholder: "o que procura?" }}
             itemsPerPageSelect={(true, { label: "Itens por Página" })}
@@ -110,21 +116,22 @@ export default function Clientes() {
             hover
             border
             striped
+            responsive
             pagination
             loading={false}
             scopedSlots={
               {
                 acoes: (item, index) => {
                   return (
-                    <td className="py-2">
-                      <CButton
+                    <td className="py-2" style={{ textAlign: 'center' }}>
+                      <CButton         
                         color="primary"
                         variant="outline"
                         shape="square"
                         size="sm"
                         onClick={() => { toggleDetails(index); }}
                       >
-                        {details.includes(index) ? 'OCULTAR' : 'MOSTRAR'}
+                        <CIcon name="cil-chevron-circle-down-alt" />
                       </CButton>
                     </td>
                   )
@@ -132,27 +139,79 @@ export default function Clientes() {
 
                 relatorio: (item, index) => {
                   return (
-                    <td className="py-2" style={{ textAlign: 'center' }}>
-                      <CButton
-                        color="primary"
-                        variant="outline"
-                        shape="square"
-                        size="sm"
-                        onClick={() => {
-                          console.log(item);
-                          setModalOpen(true);
-                          setClienteRelatorio({
-                            id_cliente: item.id,
-                            nome_cliente: item.nome
-                          })
-                        }}
-                      >
-                        <CIcon name="cil-clipboard" alt="Settings" />
-                      </CButton>
-                    </td>
+                    <>
+                      <td className="py-2" style={{ textAlign: 'center' }}>
+                        <CButton
+                          style={{ marginRight: 5 }}
+                          color="primary"
+                          variant="outline"
+
+                          size="sm"
+                          onClick={() => {
+                            console.log(item);
+                            setModalOpen(true);
+                            setClienteRelatorio({
+                              id_cliente: item.id,
+                              nome_cliente: item.nome
+                            })
+                          }}
+                        >
+                           <CIcon name="cil-clipboard" alt="Delete" />
+                        </CButton>
+
+                        <CButton
+                          style={{ marginRight: 5 }}
+                          color="primary"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            console.log(item);
+                            setModalOpen(true);
+                            setClienteRelatorio({
+                              id_cliente: item.id,
+                              nome_cliente: item.nome
+                            })
+                          }}
+                        >
+                          <CIcon name="cil-pencil" alt="Delete" />
+                        </CButton>
+                        <CButton
+                          style={{ marginRight: 5 }}
+                          color="primary"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            console.log(item);
+                            setModalOpen(true);
+                            setClienteRelatorio({
+                              id_cliente: item.id,
+                              nome_cliente: item.nome
+                            })
+                          }}
+                        >
+                          <CIcon name="cil-print" alt="Delete" />
+                        </CButton>
+                        <CButton
+
+                          color="danger"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            console.log(item);
+                            setModalOpen(true);
+                            setClienteRelatorio({
+                              id_cliente: item.id,
+                              nome_cliente: item.nome
+                            })
+                          }}
+                        >
+                          <CIcon name="cil-trash" alt="Delete" />
+                        </CButton>
+                      </td>
+
+                    </>
                   )
                 },
-
 
                 //mostrar os detalhes da ocorrencia
                 details: (item, index) => {
