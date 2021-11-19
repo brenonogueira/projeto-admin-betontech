@@ -11,6 +11,8 @@ import axios from "axios";
 import { cliente } from "src/services/api";
 import CIcon from "@coreui/icons-react";
 import ModalRelatorio from "./ModalRelatorio";
+import clienteActions from "src/store/actions/clienteActions";
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Clientes() {
   const [clientes, setClientes] = useState([]);
@@ -21,19 +23,13 @@ export default function Clientes() {
     id_cliente: null,
     nome_cliente: null
   })
-
-  const headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-  };
+  const token = sessionStorage.getItem("token")
+  const dispatch = useDispatch()
+  const rd_cliente = useSelector(state => state.clienteReducer)
 
   useEffect(() => {
-    axios.get(cliente, { headers }).then((res) => {
-      setClientes(res.data)
-      console.log(clientes)
-    });
-  }, [cliente]);
+    
+  }, []);
 
   const fields = [
     {
