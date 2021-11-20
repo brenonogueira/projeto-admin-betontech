@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
+// import Stepper from "@mui/material/Stepper";
+// import Step from "@mui/material/Step";
+// import StepLabel from "@mui/material/StepLabel";
+// import Button from "@mui/material/Button";
 import {
   CButton,
   CCard,
@@ -26,10 +26,13 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { cliente_relatorio, relatorio } from "src/services/api";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from 'react-redux'
+import clienteActions from '../../store/actions/clienteActions'
 
-const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
+const ModalRelatorio = ({ modalOpen, setModalOpen, clienteRelatorio }) => {
+  const dispatch = useDispatch()
   const [id_relatorio, setId_Relatorio] = useState(null)
-  // const [token, setToken] = useState(null)
+  const token = sessionStorage.getItem("token")
 
   const close_modal = () => {
     setModalOpen(false)
@@ -67,6 +70,7 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
         conferente: formik.values.conferente_relatorio,
         responsavel: formik.values.responsavel_relatorio,
         cliente_id: clienteRelatorio.id_cliente,
+        obs: formik.values.obs_relatorio
       },
       {
         headers,
@@ -78,13 +82,15 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
       console.log("criado com sucesso");
       // getUser(profile_api);
       getRelatorio(res.data.token)
+      dispatch(clienteActions.index_cliente(token))
+      close_modal()
       // dispatch(ocorrenciasActions.index_ocorrencia_unidade(usuarioID))
       toast.success("Relatório cadastrado com sucesso!", { autoClose: 2000 });
     }).catch((err) => {
       console.log(err);
       toast.error("Erro ao cadastrar Relatório. Tente novamente", { autoClose: 2000 });
     });
-;
+    ;
   };
 
   const formik = useFormik({
@@ -96,49 +102,23 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
       certificado_relatorio: "",
       conferente_relatorio: "",
       responsavel_relatorio: "",
+      obs_relatorio: "",
     },
   });
 
-  // useEffect(() => {
-  //   axios
-  //   .get(cliente_relatorio, {
-  //     headers: {
-  //       "x-token": token,
-  //     },
-  //   })
-  //   .then((res) => {
-  //     setRelatorio(res.data[0])
-  //     console.log(res.data);
-  //   });
-  // }, [])
+  return (
+    <CModal style={{ marginTop: '-20px' }} onClose={close_modal} color="" size="lg" show={modalOpen} closeOnBackdrop={false} borderColor="gray-900" fade={true}>
+      <CModalHeader style={{ display: "flex", justifyContent: "space-between" }} closeButton>
+        <CModalTitle>Cadastrar Relatório - {clienteRelatorio.nome_cliente}</CModalTitle>
+      </CModalHeader>
+      <CContainer>
+        <CCard>
 
-  const [activeStep, setActiveStep] = useState(0);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  function getSteps() {
-    return [ "Relatório", "Teste"];
-  }
-
-  function getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return (
           <CCol xs="12" sm="12" lg="12">
             <CRow>
               <CCol xs="12" sm="12" xl="12" lg="12" md="12">
                 <CCardBody>
-                
+
                   <CCardBody>
                     <CFormGroup row className="my-0">
                       <CCol xs="6">
@@ -195,82 +175,21 @@ const ModalRelatorio = ({modalOpen, setModalOpen, clienteRelatorio}) => {
                     </CFormGroup>
                     <CFormGroup>
                       <CLabel>Obs</CLabel>
-                      <CInput placeholder="Obs" />
+                      <CInput placeholder="Obs" {...formik.getFieldProps("obs_relatorio")} />
                     </CFormGroup>
                   </CCardBody>
                 </CCardBody>
               </CCol>
             </CRow>
           </CCol>
-        );
-      case 1:
-        return (
-          <CContainer fluid>
-            a
-          </CContainer>
-        );
-      default:
-        return "Unknown stepIndex";
-    }
-  }
 
-  const steps = getSteps();
-
-  return (
-    <CModal style={{ marginTop: '-20px' }} onClose={close_modal} color="" size="lg" show={modalOpen} closeOnBackdrop={false} borderColor="gray-900" fade={true}>
-        <CModalHeader style={{  display: "flex", justifyContent: "space-between" }} closeButton>
-          <CModalTitle>Cadastrar Relatório - {clienteRelatorio.nome_cliente}</CModalTitle>
-        </CModalHeader>
-
-    <CContainer>
-      {/* <Stepper
-        style={{ width: "10px", height: "25px"}}
-        activeStep={activeStep}
-        alternativeLabel
-      >
-        {steps.map((aba) => (
-          <Step key={aba}>
-            <StepLabel>{aba}</StepLabel>
-          </Step>
-        ))}
-      </Stepper> */}
-      {activeStep === 2 ? (
-        <div>
-          {/* <Typography component={'span'} variant={'body2'} className={classes.instructions}>All steps completed</Typography> */}
-          <Button onClick={handleReset}>Resetar</Button>
-        </div>
-      ) : (
-        <CCard>
-          {getStepContent(activeStep)}
           <CCardFooter>
-            <CButton onClick={handleBack} disabled={activeStep === 0 }>
-              Voltar
-            </CButton>
-            <CButton onClick={() => {
-              handleNext();
-              if(activeStep === 0 ) {
-                 cadastraRelatorio()
-              } else if (activeStep === 1) {
-                handleNext();
-                // cadastraRelatorio()
-              } else if ( activeStep === 2) {
-                handleNext();
-                // cadastraTeste()
-              }
-              }} variant="" className="bg-gray-900" disabled={formik.values.telefone_cliente === ""}>
-                Cadastrar
-            </CButton>
-            <CButton
-              href="/dashboard"
-              variant=""
-              className="bg-gray-900 float-right "
-            >
-              Cancelar
+            <CButton onClick={() => { cadastraRelatorio() }} variant="" className="bg-gray-900 float-right " disabled={formik.values.serie_relatorio === ""}>
+              Cadastrar
             </CButton>
           </CCardFooter>
         </CCard>
-      )}
-    </CContainer>
+      </CContainer>
     </CModal>
   );
 };

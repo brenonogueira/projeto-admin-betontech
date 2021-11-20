@@ -9,16 +9,11 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Listar Clientes',
+    name: 'Clientes',
     to: '/clientes',
     icon: 'cil-address-book',
   },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Cadastro',
-    to: '/cadastro',
-    icon: 'cil-pencil',
-  },
+
   {
     _tag: 'CSidebarNavItem',
     name: 'Alterar Senha',
