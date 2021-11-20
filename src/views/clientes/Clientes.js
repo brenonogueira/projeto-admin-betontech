@@ -28,8 +28,10 @@ export default function Clientes() {
   const rd_cliente = useSelector(state => state.clienteReducer)
 
   useEffect(() => {
-    
+    dispatch(clienteActions.index_cliente(token))
   }, []);
+
+  console.log(rd_cliente)
 
   const fields = [
     {
@@ -80,7 +82,6 @@ export default function Clientes() {
 
   console.log(ordenarClientes)
 
-
   return (
     <>
       <CCard>
@@ -104,7 +105,7 @@ export default function Clientes() {
               <CButton onClick={openModalCreate} className="bg-gray-900" variant="outline" size="lg">Adicionar Nova Ocorrência</CButton>
             </div> */}
           <CDataTable
-            items={ordenarClientes}
+            items={rd_cliente?.index}
             fields={fields}
             tableFilter={{ label: "Filtrar", placeholder: "o que procura?" }}
             itemsPerPageSelect={(true, { label: "Itens por Página" })}
@@ -120,7 +121,7 @@ export default function Clientes() {
                 acoes: (item, index) => {
                   return (
                     <td className="py-2" style={{ textAlign: 'center' }}>
-                      <CButton         
+                      <CButton
                         color="primary"
                         variant="outline"
                         shape="square"
@@ -141,7 +142,6 @@ export default function Clientes() {
                           style={{ marginRight: 5 }}
                           color="primary"
                           variant="outline"
-
                           size="sm"
                           onClick={() => {
                             console.log(item);
@@ -152,7 +152,7 @@ export default function Clientes() {
                             })
                           }}
                         >
-                           <CIcon name="cil-clipboard" alt="Delete" />
+                          <CIcon name="cil-clipboard" alt="Delete" />
                         </CButton>
 
                         <CButton
@@ -211,18 +211,52 @@ export default function Clientes() {
 
                 //mostrar os detalhes da ocorrencia
                 details: (item, index) => {
-                  // console.log(item)
                   return (
                     <CCollapse show={details.includes(index)}>
-                      <CCardBody>
-                        <h4>{item.nome}</h4>
-                        <p> {` Rua: ${item.endereco?.rua}, Bairro: ${item.endereco?.bairro}, Número: ${item.endereco?.numero} `}</p>
-                        <p> {` Cidade: ${item.endereco?.cidade}, Estado: ${item.endereco?.estado}, CEP: ${item.endereco?.cep} `}</p>
-                        <p className="text-muted">
-
-                        </p>
-
-                      </CCardBody>
+                      <CCard>
+                        <CCardBody>
+                          <CCard>
+                            <CCardHeader>
+                              Card title
+                              {/* <DocsLink name="CCard" /> */}
+                            </CCardHeader>
+                            <CCardBody>
+                              <strong>Nome:</strong> {item.nome}{" "}
+                              <br />
+                              <strong>CNPJ:</strong> {item.cnpj}
+                              <br />
+                              <strong>ENDEREÇO:</strong> {item.rua} -
+                              Bairro: {item.bairro} - Cidade:{" "}
+                              {item.cidade} - CEP: {item.cep}{" "}
+                              <br />
+                              <strong>OBRA:</strong> {item.obra}{" "}
+                              <br />
+                              <strong>CONTRATO:</strong>{" "}
+                              {item.contrato} <br />
+                              <strong>TELEFONE:</strong>{" "}
+                              {item.telefone} <br/><br/>
+                              <CDataTable
+                            items={item.relatorio}
+                            fields={['serie', 'token']}
+                            hover
+                            striped
+                            bordered
+                            sorter={true}
+                            columnFilter
+                            responsive
+                            size="sm"
+                            itemsPerPage={10}
+                            pagination
+                            scopedSlots={{
+                              // status: (item) => <td></td>,
+                            }}
+                          />
+                            </CCardBody>
+                          </CCard>
+                         
+                        
+                        </CCardBody>
+                      </CCard>
                     </CCollapse>
                   );
                 },
