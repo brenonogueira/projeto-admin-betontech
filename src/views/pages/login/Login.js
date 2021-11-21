@@ -44,7 +44,7 @@ const Login = () => {
   useEffect(() => {
     // console.log("chegou aqui ");
     if (token !== null) {
-     <Redirect to={'/'}/>
+      <Redirect to={'/'}/>
     } else {
       <Redirect to={'/login'}/>
     }
@@ -96,11 +96,11 @@ const Login = () => {
                           Entrar
                         </CButton>
                       </CCol>
-                      <CCol xs="6" className="text-right">
+                      {/* <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">
                           Esqueceu sua senha?
                         </CButton>
-                      </CCol>
+                      </CCol> */}
                     </CRow>
                   </form>
                 </CCardBody>
