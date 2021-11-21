@@ -92,119 +92,119 @@ const Cadastro = () => {
   //       );
   //     case 1:
   //       return (
-  //         <CContainer fluid>
-  //           <CRow>
-  //             <CCol xs="12" sm="12" xl="12" lg="12" md="12">
-  //               <CCardBody>
-  //                 <CCardHeader>
-  //                   <small>Teste</small>
-  //                 </CCardHeader>
-  //                 <CCardBody>
-  //                   <CFormGroup row className="my-0">
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel htmlFor="city">Lab</CLabel>
-  //                         <CInput placeholder="Lab" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>Nota</CLabel>
-  //                         <CInput placeholder="Nota" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                   </CFormGroup>
-  //                   <CFormGroup row className="my-0">
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>fckProj</CLabel>
-  //                         <CInput placeholder="fckProj" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>Responsável</CLabel>
-  //                         <CInput placeholder="Responsável" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                   </CFormGroup>
-  //                   <CFormGroup row className="my-0">
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>Moldagem</CLabel>
-  //                         <CInput
-  //                           type="date"
-  //                           id="date-input"
-  //                           name="date-input"
-  //                           placeholder="moldagem"
-  //                         />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>Ruptura</CLabel>
-  //                         <CInput
-  //                           type="date"
-  //                           id="date-input"
-  //                           name="date-input"
-  //                           placeholder="ruptura"
-  //                         />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                   </CFormGroup>
-  //                   <CFormGroup row className="my-0">
-  //                     <CCol xs="4">
-  //                       <CFormGroup>
-  //                         <CLabel>Idade</CLabel>
-  //                         <CInput placeholder="Idade" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                     <CCol xs="4">
-  //                       <CFormGroup>
-  //                         <CLabel>Slump</CLabel>
-  //                         <CInput placeholder="Slump" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                     <CCol xs="4">
-  //                       <CFormGroup>
-  //                         <CLabel>Hora</CLabel>
-  //                         <CInput placeholder="Hora" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                   </CFormGroup>
-  //                   <CFormGroup row className="my-0">
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>Local</CLabel>
-  //                         <CInput placeholder="Local" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>Peça</CLabel>
-  //                         <CInput placeholder="Peça" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                   </CFormGroup>
-  //                   <CFormGroup row className="my-0">
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>Carga</CLabel>
-  //                         <CInput placeholder="Local" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                     <CCol xs="6">
-  //                       <CFormGroup>
-  //                         <CLabel>FCK</CLabel>
-  //                         <CInput placeholder="FCK" />
-  //                       </CFormGroup>
-  //                     </CCol>
-  //                   </CFormGroup>
-  //                 </CCardBody>
-  //               </CCardBody>
-  //             </CCol>
-  //           </CRow>
-  //         </CContainer>
+    //         <CContainer fluid>
+    //           <CRow>
+    //             <CCol xs="12" sm="12" xl="12" lg="12" md="12">
+    //               <CCardBody>
+    //                 <CCardHeader>
+    //                   <small>Teste</small>
+    //                 </CCardHeader>
+    //                 <CCardBody>
+    //                   <CFormGroup row className="my-0">
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel htmlFor="city">Lab</CLabel>
+    //                         <CInput placeholder="Lab" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>Nota</CLabel>
+    //                         <CInput placeholder="Nota" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                   </CFormGroup>
+    //                   <CFormGroup row className="my-0">
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>fckProj</CLabel>
+    //                         <CInput placeholder="fckProj" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>Responsável</CLabel>
+    //                         <CInput placeholder="Responsável" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                   </CFormGroup>
+    //                   <CFormGroup row className="my-0">
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>Moldagem</CLabel>
+    //                         <CInput
+    //                           type="date"
+    //                           id="date-input"
+    //                           name="date-input"
+    //                           placeholder="moldagem"
+    //                         />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>Ruptura</CLabel>
+    //                         <CInput
+    //                           type="date"
+    //                           id="date-input"
+    //                           name="date-input"
+    //                           placeholder="ruptura"
+    //                         />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                   </CFormGroup>
+    //                   <CFormGroup row className="my-0">
+    //                     <CCol xs="4">
+    //                       <CFormGroup>
+    //                         <CLabel>Idade</CLabel>
+    //                         <CInput placeholder="Idade" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                     <CCol xs="4">
+    //                       <CFormGroup>
+    //                         <CLabel>Slump</CLabel>
+    //                         <CInput placeholder="Slump" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                     <CCol xs="4">
+    //                       <CFormGroup>
+    //                         <CLabel>Hora</CLabel>
+    //                         <CInput placeholder="Hora" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                   </CFormGroup>
+    //                   <CFormGroup row className="my-0">
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>Local</CLabel>
+    //                         <CInput placeholder="Local" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>Peça</CLabel>
+    //                         <CInput placeholder="Peça" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                   </CFormGroup>
+    //                   <CFormGroup row className="my-0">
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>Carga</CLabel>
+    //                         <CInput placeholder="Local" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                     <CCol xs="6">
+    //                       <CFormGroup>
+    //                         <CLabel>FCK</CLabel>
+    //                         <CInput placeholder="FCK" />
+    //                       </CFormGroup>
+    //                     </CCol>
+    //                   </CFormGroup>
+    //                 </CCardBody>
+    //               </CCardBody>
+    //             </CCol>
+    //           </CRow>
+    //         </CContainer>
   //       );
   //     default:
   //       return "Unknown stepIndex";

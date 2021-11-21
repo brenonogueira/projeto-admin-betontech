@@ -1,7 +1,5 @@
 export const initialState = {
   isLogged: false,
-  user: null,
-
 };
 
 const authReducer = (state = initialState, action) => {
@@ -10,14 +8,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogged: true,
-        user: action.payload,
       };
     case "LOGOUT":
       return {
         ...state,
         isLogged: false,
-        user: null,
-
       };
 
     default:

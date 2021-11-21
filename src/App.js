@@ -1,14 +1,16 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import {
   Route,
   Switch,
-  // useHistory,
+  useHistory,
   Redirect,
-  // useLocation,
+  useLocation,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./scss/style.scss";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -25,6 +27,18 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
 const App = () => {
+  const location = useLocation();
+  const history = useHistory();
+  const token = sessionStorage.getItem("token")
+  const rd_auth = useSelector((state) => state.authReducer);
+
+  useEffect(() => {
+    if (location?.pathname === "/login" && rd_auth.isLogged) {
+      history.push("/ocorrencias");
+    }
+  }, [location]);
+
+
   return (
     <>
       <Switch>
@@ -58,7 +72,7 @@ const App = () => {
             path="/"
             name="Home"
             render={(props) =>
-              sessionStorage.getItem("token") ? (
+              token ? (
                 <TheLayout {...props} />
               ) : (
                 <Redirect to="/login" />

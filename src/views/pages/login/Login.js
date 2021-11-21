@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -8,7 +8,7 @@ import {
   CCardGroup,
   CCol,
   CContainer,
-  CForm,
+  // CForm,
   CInput,
   CInputGroup,
   CInputGroupPrepend,
@@ -17,13 +17,14 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { useFormik } from "formik";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import {useAuth}  from "src/hooks/useAuth";
 
 const Login = () => {
-  const history = useHistory();
+  const token = sessionStorage.getItem("token")
+  // const history = useHistory();
   const autentica = useAuth();
-  const rd_auth = useSelector((state) => state.authReducer)
+  // const rd_auth = useSelector((state) => state.authReducer)
 
   const formik = useFormik({
     initialValues: {
@@ -32,20 +33,24 @@ const Login = () => {
     },
   });
 
-  const fn_logar = () => {
+  const fn_logar = (e) => {
+    e.preventDefault()
     autentica.fn_login(formik.values.email, formik.values.password)
   }
+  
+  useEffect(() => {
+  }, [token])
 
   useEffect(() => {
     // console.log("chegou aqui ");
-    if (rd_auth?.isLogged === true) {
-      history.push("/");
+    if (token !== null) {
+     <Redirect to={'/'}/>
     } else {
-      history.push("/login");
+      <Redirect to={'/login'}/>
     }
-  }, [rd_auth]);
+  }, [token]);
 
-  console.log(rd_auth)
+  console.log(formik.values)
 
 
   return (
@@ -56,7 +61,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <form onSubmit={fn_logar}>
                     <h1>Login</h1>
                     <p className="text-muted">Entrar</p>
                     <CInputGroup className="mb-3">
@@ -87,7 +92,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton onClick={fn_logar} color="primary" className="px-4">
+                        <CButton type="submit" color="primary" className="px-4">
                           Entrar
                         </CButton>
                       </CCol>
@@ -97,7 +102,7 @@ const Login = () => {
                         </CButton>
                       </CCol>
                     </CRow>
-                  </CForm>
+                  </form>
                 </CCardBody>
               </CCard>
               <CCard

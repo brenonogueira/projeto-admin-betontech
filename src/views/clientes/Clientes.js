@@ -15,6 +15,7 @@ import clienteActions from "src/store/actions/clienteActions";
 import { useSelector, useDispatch } from "react-redux";
 import ModalCliente from "./ModalCliente";
 import { ModalClienteRelatorioTeste } from "./ModalClienteRelatorioTeste";
+import ModalTeste from "./ModalTeste";
 
 export default function Clientes() {
   const [clientes, setClientes] = useState([]);
@@ -91,6 +92,10 @@ export default function Clientes() {
 
   const openModalClienteRelatorioTeste = () => {
     dispatch(clienteActions.modal_mode_cliente_relatorio_teste(true));
+  };
+
+  const openModalCreateTeste = () => {
+    dispatch(clienteActions.modal_mode_teste(true));
   };
 
   console.log(ordenarClientes);
@@ -228,6 +233,7 @@ export default function Clientes() {
                       <CCardBody>
                         <CCard>
                           <CCardBody>
+                           
                             <strong>Nome:</strong> {item.nome} <br />
                             <strong>CNPJ:</strong> {item.cnpj}
                             <br />
@@ -239,6 +245,16 @@ export default function Clientes() {
                             <strong>CONTRATO:</strong> {item.contrato} <br />
                             <strong>TELEFONE:</strong> {item.telefone} <br />
                             <br />
+                            <div style={{display:'flex', justifyContent: 'flex-end', padding: '10px'}}>
+                            <CButton
+                              onClick={openModalCreateTeste}
+                              className="bg-gray-900"
+                              variant=""
+                              size="md"
+                            >
+                              Adicionar Teste
+                            </CButton>
+                            </div>
                             <CDataTable
                               items={item.relatorio}
                               fields={["serie", "token", "acoes"]}
@@ -255,13 +271,23 @@ export default function Clientes() {
                                 acoes: (item) => {
                                   // console.log(item?.id);
                                   return (
-                                    <td style={{textAlign:'center'}}>
-                                   
+                                    <td style={{ textAlign: "center" }}>
                                       <CButton
-                                        onClick={() => {openModalClienteRelatorioTeste(); dispatch(clienteActions.show_cliente_relatorio_teste(token, item.id))}}
+                                        onClick={() => {
+                                          openModalClienteRelatorioTeste();
+                                          dispatch(
+                                            clienteActions.show_cliente_relatorio_teste(
+                                              token,
+                                              item.id
+                                            )
+                                          );
+                                        }}
                                         color="primary"
                                       >
-                                       <CIcon name="cil-file" alt="Relatorio Completo" />
+                                        <CIcon
+                                          name="cil-file"
+                                          alt="Relatorio Completo"
+                                        />
                                       </CButton>
                                     </td>
                                   );
@@ -280,6 +306,7 @@ export default function Clientes() {
         </CCardBody>
       </CCard>
       <ModalClienteRelatorioTeste />
+      <ModalTeste/>
       <ModalCliente />
       <ModalRelatorio
         modalOpen={modalOpen}

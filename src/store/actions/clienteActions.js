@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 import { cliente, relatorio } from "../../services/api";
 
@@ -42,6 +43,10 @@ const modal_mode_cliente_relatorio_teste = (values) => {
   return { type: "MODAL_MODE_CLIENTE_RELATORIO_TESTE", values };
 };
 
+const modal_mode_teste = (values) => {
+  return { type: "MODAL_MODE_TESTE", values };
+};
+
 export default {
   index_cliente,
   add_data_index_cliente,
@@ -54,4 +59,5 @@ export default {
 
   modal_mode_cliente,
   modal_mode_cliente_relatorio_teste,
+  modal_mode_teste
 };

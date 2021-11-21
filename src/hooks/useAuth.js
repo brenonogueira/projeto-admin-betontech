@@ -1,9 +1,10 @@
 // import React from 'react'
 import axios from "axios";
 import authActions from "src/store/actions/authActions";
+import userActions from "src/store/actions/userActions";
 import { api_login } from "src/services/api";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 export function useAuth() {
   const dispatch = useDispatch();
@@ -13,11 +14,14 @@ export function useAuth() {
     axios.post(api_login, {email,  password}, {  headers: {'Content-Type': 'application/json'}})
     .then((res) => {
         sessionStorage.setItem('token', res.data.token);
-        dispatch(authActions.login(res.data.user))
-    })
-  };
-
-  const fn_logout = () => {
+        dispatch(authActions.login(res.data.user));
+        dispatch(userActions.index_user(res.data.token)) ;
+        <Redirect to="/dashboard" />;
+      })
+      
+    };
+    
+    const fn_logout = () => {
     dispatch(authActions.logout());
     sessionStorage.removeItem('token');
     history.push("/login")
