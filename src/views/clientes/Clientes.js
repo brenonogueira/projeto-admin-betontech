@@ -34,7 +34,7 @@ export default function Clientes() {
     dispatch(clienteActions.index_cliente(token));
   }, []);
 
-  console.log(rd_cliente);
+  // console.log(rd_cliente);
 
   const fields = [
     {
@@ -98,7 +98,7 @@ export default function Clientes() {
     dispatch(clienteActions.modal_mode_teste(true));
   };
 
-  console.log(ordenarClientes);
+  // console.log(ordenarClientes);
 
   return (
     <>
@@ -163,7 +163,7 @@ export default function Clientes() {
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          console.log(item);
+                          // console.log(item);
                           setModalOpen(true);
                           setClienteRelatorio({
                             id_cliente: item.id,
@@ -180,7 +180,7 @@ export default function Clientes() {
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          console.log(item);
+                          // console.log(item);
                           setModalOpen(true);
                           setClienteRelatorio({
                             id_cliente: item.id,
@@ -196,7 +196,7 @@ export default function Clientes() {
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          console.log(item);
+                          // console.log(item);
                           setModalOpen(true);
                           setClienteRelatorio({
                             id_cliente: item.id,
@@ -211,7 +211,7 @@ export default function Clientes() {
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          console.log(item);
+                          // console.log(item);
                           setModalOpen(true);
                           setClienteRelatorio({
                             id_cliente: item.id,
@@ -245,16 +245,7 @@ export default function Clientes() {
                             <strong>CONTRATO:</strong> {item.contrato} <br />
                             <strong>TELEFONE:</strong> {item.telefone} <br />
                             <br />
-                            <div style={{display:'flex', justifyContent: 'flex-end', padding: '10px'}}>
-                            <CButton
-                              onClick={openModalCreateTeste}
-                              className="bg-gray-900"
-                              variant=""
-                              size="md"
-                            >
-                              Adicionar Teste
-                            </CButton>
-                            </div>
+                           
                             <CDataTable
                               items={item.relatorio}
                               fields={["serie", "token", "acoes"]}
@@ -269,9 +260,9 @@ export default function Clientes() {
                               pagination
                               scopedSlots={{
                                 acoes: (item) => {
-                                  // console.log(item?.id);
                                   return (
                                     <td style={{ textAlign: "center" }}>
+                                      {/* {console.log(item)} */}
                                       <CButton
                                         onClick={() => {
                                           openModalClienteRelatorioTeste();
@@ -306,7 +297,7 @@ export default function Clientes() {
         </CCardBody>
       </CCard>
       <ModalClienteRelatorioTeste />
-      <ModalTeste/>
+      
       <ModalCliente />
       <ModalRelatorio
         modalOpen={modalOpen}

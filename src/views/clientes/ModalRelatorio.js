@@ -67,6 +67,7 @@ const ModalRelatorio = ({ modalOpen, setModalOpen, clienteRelatorio }) => {
         serie: formik.values.serie_relatorio,
         aferido: formik.values.aferido_relatorio,
         certificado: formik.values.certificado_relatorio,
+        executor: formik.values.executor_relatorio,
         conferente: formik.values.conferente_relatorio,
         responsavel: formik.values.responsavel_relatorio,
         cliente_id: clienteRelatorio.id_cliente,
@@ -90,7 +91,6 @@ const ModalRelatorio = ({ modalOpen, setModalOpen, clienteRelatorio }) => {
       console.log(err);
       toast.error("Erro ao cadastrar Relatório. Tente novamente", { autoClose: 2000 });
     });
-    ;
   };
 
   const formik = useFormik({
@@ -99,6 +99,7 @@ const ModalRelatorio = ({ modalOpen, setModalOpen, clienteRelatorio }) => {
       marca_relatorio: "",
       serie_relatorio: "",
       aferido_relatorio: "",
+      executor_relatorio: "",
       certificado_relatorio: "",
       conferente_relatorio: "",
       responsavel_relatorio: "",
@@ -160,13 +161,19 @@ const ModalRelatorio = ({ modalOpen, setModalOpen, clienteRelatorio }) => {
                       </CCol>
                     </CFormGroup>
                     <CFormGroup row className="my-0">
-                      <CCol xs="6">
+                    <CCol xs="12">
+                        <CFormGroup>
+                          <CLabel>Executor</CLabel>
+                          <CInput placeholder="Executor" {...formik.getFieldProps("executor_relatorio")} />
+                        </CFormGroup>
+                      </CCol>
+                      <CCol xs="12">
                         <CFormGroup>
                           <CLabel>Conferente</CLabel>
                           <CInput placeholder="Conferente" {...formik.getFieldProps("conferente_relatorio")} />
                         </CFormGroup>
                       </CCol>
-                      <CCol xs="6">
+                      <CCol xs="12">
                         <CFormGroup>
                           <CLabel>Responsável</CLabel>
                           <CInput placeholder="Responsável" {...formik.getFieldProps("responsavel_relatorio")} />
