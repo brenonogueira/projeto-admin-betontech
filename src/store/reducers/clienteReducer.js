@@ -5,6 +5,7 @@ export const initialState = {
   modal_mode: false,
   modal_mode_cliente_relatorio_teste: false,
   modal_mode_teste: false,
+  modal_mode_impressao: false,
   modal_destroy: {
     modal: false,
     id: null
@@ -19,6 +20,7 @@ const clienteReducer = (state = initialState, action) => {
     case 'EDIT_MODE_CLIENTE': return { ...state, edit_mode: action.values };
     case 'MODAL_MODE_CLIENTE': return { ...state, modal_mode: action.values };
     case 'MODAL_MODE_CLIENTE_RELATORIO_TESTE': return { ...state, modal_mode_cliente_relatorio_teste: action.values };
+    case 'MODAL_MODE_IMPRESSAO': return { ...state, modal_mode_impressao: action.values };
     case 'MODAL_MODE_TESTE': return { ...state, modal_mode_teste: action.values };
     case 'MODAL_DESTROY_CLIENTE': return { ...state, modal_destroy: action.values };
     default: return state

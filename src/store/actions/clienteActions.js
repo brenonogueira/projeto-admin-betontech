@@ -24,6 +24,17 @@ const show_cliente_relatorio_teste = (tokenDeAcesso, idRelatorio) => {
   };
 };
 
+const destroy_relatorio = (id, token) => {
+  return dispatch => {
+    axios.delete(`${relatorio}/${id} sdsadadasds`, { headers: { Authorization: `Bearer ${token}` } })
+      .then(res => {
+        dispatch(modal_destroy_cliente(false))
+        dispatch(index_cliente(token))
+      })
+  };
+};
+
+
 const add_data_index_cliente = (values) => {
   return { type: "INDEX_CLIENTE", values };
 };
@@ -47,6 +58,10 @@ const modal_mode_teste = (values) => {
   return { type: "MODAL_MODE_TESTE", values };
 };
 
+const modal_mode_impressao = (values) => {
+  return { type: "MODAL_MODE_IMPRESSAO", values };
+};
+
 export default {
   index_cliente,
   add_data_index_cliente,
@@ -56,8 +71,10 @@ export default {
 
   edit_mode_cliente,
   modal_destroy_cliente,
+  destroy_relatorio,
 
   modal_mode_cliente,
   modal_mode_cliente_relatorio_teste,
-  modal_mode_teste
+  modal_mode_teste,
+  modal_mode_impressao
 };

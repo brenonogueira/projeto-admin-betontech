@@ -42,7 +42,6 @@ const TrocarSenha = () => {
       });
     };
   
-
     return (
         <CRow>
           <CCol lg={12}>

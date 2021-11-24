@@ -268,8 +268,8 @@ export default function ModalTeste({ idRelatorio }) {
                         </CCol> */}
                 </CFormGroup>
               </CCardBody>
-              <CCardFooter>
-                <CButton onClick={cadastraRelatorio}> CADASTRAR</CButton>
+              <CCardFooter style={{textAlign: 'end'}}>
+                <CButton className="bg-gray-900"  onClick={cadastraRelatorio}> CADASTRAR</CButton>
               </CCardFooter>
             </CCardBody>
           </CCol>

@@ -1,68 +1,19 @@
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CContainer,
-  CDataTable,
-  CModal,
-  CModalHeader,
-  CModalTitle,
-} from "@coreui/react";
+import { CButton, CCard, CCardBody, CCol, CContainer, CDataTable, CRow } from "@coreui/react";
 import moment from "moment";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import clienteActions from "src/store/actions/clienteActions";
-import ModalTeste from "./ModalTeste";
-import PrintComponent from "./PrintComponent";
 
-export const ModalClienteRelatorioTeste = () => {
-  const token = sessionStorage.getItem("token");
-  const dispatch = useDispatch();
-  const rd_cliente = useSelector((state) => state.clienteReducer);
 
-  const close_modal = () => {
-    dispatch(clienteActions.modal_mode_cliente_relatorio_teste(false));
-  };
+export const ModalImpressaoContent = React.forwardRef(
+  ({ modalOpen, setOpen, relatorio, setRelatorio, dataAferido }, ref) => {
 
-  const openModalCreateTeste = () => {
-    dispatch(clienteActions.modal_mode_teste(true));
-  };
+    const rd_cliente = useSelector((state) => state.clienteReducer);
 
-  console.log(rd_cliente?.show);
+    console.log(rd_cliente?.show);
 
-  return (
-    <CModal
-      style={{ marginTop: "-20px" }}
-      onClose={close_modal}
-      color=""
-      size="xl"
-      show={rd_cliente.modal_mode_cliente_relatorio_teste}
-      closeOnBackdrop={false}
-      borderColor="gray-900"
-      fade={true}
-    >
-      <CModalHeader
-        style={{ display: "flex", justifyContent: 'space-between' }}
-        closeButton
-      >
-        <CModalTitle>
-          <span>
-          RELATÓRIO - Nº Série: {rd_cliente.show ? rd_cliente.show[0].serie : null}
-          </span>
-        </CModalTitle>
-        <PrintComponent
-          onClick={() =>
-            dispatch(
-              clienteActions.show_cliente_relatorio_teste(
-                token,
-                rd_cliente.show[0].relatorio.id
-              )
-            )
-          }
-        />
-      </CModalHeader>
-      <CContainer>
-        <CCard>
+    return (
+      <div ref={ref}>
+       <CContainer>
           {rd_cliente.show ? (
             <CCardBody>
               <strong>Nome:</strong> {rd_cliente.show[0].cliente.nome} <br />
@@ -82,14 +33,14 @@ export const ModalClienteRelatorioTeste = () => {
                 }}
               >
                 <h5>Testes:</h5>
-                <CButton
+                {/* <CButton
                   onClick={openModalCreateTeste}
                   className="bg-gray-900"
                   variant=""
                   size="md"
                 >
                   Adicionar Teste
-                </CButton>
+                </CButton> */}
               </div>
               <CDataTable
                 items={rd_cliente.show[0].teste.map((el) => {
@@ -181,11 +132,8 @@ export const ModalClienteRelatorioTeste = () => {
               </div>
             </CCardBody>
           ) : null}
-        </CCard>
       </CContainer>
-      <ModalTeste
-        idRelatorio={rd_cliente.show ? rd_cliente?.show[0].id : null}
-      />
-    </CModal>
-  );
-};
+      </div>
+    );
+  }
+);

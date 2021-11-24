@@ -16,6 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 import ModalCliente from "./ModalCliente";
 import { ModalClienteRelatorioTeste } from "./ModalClienteRelatorioTeste";
 import ModalTeste from "./ModalTeste";
+import ModalExcluir from "./ModalExcluir";
+import PrintComponent from "./PrintComponent";
 
 export default function Clientes() {
   const [clientes, setClientes] = useState([]);
@@ -65,10 +67,28 @@ export default function Clientes() {
 
     {
       key: "relatorio",
-      label: "Ações",
-      _style: { width: "13%", textAlign: "center" },
+      label: "RELATÓRIO",
+      _style: { width: "4%", textAlign: "center" },
     },
     { key: "acoes", label: "", _style: { width: "4%" } },
+  ];
+
+  const fields_relatorio = [
+    {
+      key: "serie",
+      label: "SÉRIE",
+      _style: { width: "4%", textAlign: "center" },
+    },
+    {
+      key: "token",
+      label: "TOKEN",
+      _style: { width: "4%", textAlign: "center" },
+    },
+    {
+      key: "acoes",
+      label: "AÇÕES",
+      _style: { width: "5%", textAlign: "center" },
+    },
   ];
 
   const toggleDetails = (index) => {
@@ -99,6 +119,16 @@ export default function Clientes() {
   };
 
   // console.log(ordenarClientes);
+
+  function btn_excluir() {
+    dispatch(
+      clienteActions.destroy_relatorio(rd_cliente.modal_destroy.id, token)
+    );
+  }
+
+  function btn_cancel_excluir() {
+    dispatch(clienteActions.modal_destroy_cliente({ modal: false, id: null }));
+  }
 
   return (
     <>
@@ -174,7 +204,7 @@ export default function Clientes() {
                         <CIcon name="cil-clipboard" alt="Delete" />
                       </CButton>
 
-                      <CButton
+                      {/* <CButton
                         style={{ marginRight: 5 }}
                         color="primary"
                         variant="outline"
@@ -189,24 +219,9 @@ export default function Clientes() {
                         }}
                       >
                         <CIcon name="cil-pencil" alt="Delete" />
-                      </CButton>
-                      <CButton
-                        style={{ marginRight: 5 }}
-                        color="primary"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          // console.log(item);
-                          setModalOpen(true);
-                          setClienteRelatorio({
-                            id_cliente: item.id,
-                            nome_cliente: item.nome,
-                          });
-                        }}
-                      >
-                        <CIcon name="cil-print" alt="Delete" />
-                      </CButton>
-                      <CButton
+                      </CButton> */}
+
+                      {/* <CButton
                         color="danger"
                         variant="outline"
                         size="sm"
@@ -220,7 +235,7 @@ export default function Clientes() {
                         }}
                       >
                         <CIcon name="cil-trash" alt="Delete" />
-                      </CButton>
+                      </CButton> */}
                     </td>
                   </>
                 );
@@ -233,7 +248,6 @@ export default function Clientes() {
                       <CCardBody>
                         <CCard>
                           <CCardBody>
-                           
                             <strong>Nome:</strong> {item.nome} <br />
                             <strong>CNPJ:</strong> {item.cnpj}
                             <br />
@@ -245,10 +259,9 @@ export default function Clientes() {
                             <strong>CONTRATO:</strong> {item.contrato} <br />
                             <strong>TELEFONE:</strong> {item.telefone} <br />
                             <br />
-                           
                             <CDataTable
                               items={item.relatorio}
-                              fields={["serie", "token", "acoes"]}
+                              fields={fields_relatorio}
                               hover
                               striped
                               bordered
@@ -261,7 +274,12 @@ export default function Clientes() {
                               scopedSlots={{
                                 acoes: (item) => {
                                   return (
-                                    <td style={{ textAlign: "center" }}>
+                                    <td
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                      }}
+                                    >
                                       {/* {console.log(item)} */}
                                       <CButton
                                         onClick={() => {
@@ -273,6 +291,7 @@ export default function Clientes() {
                                             )
                                           );
                                         }}
+                                        size="sm"
                                         color="primary"
                                       >
                                         <CIcon
@@ -280,6 +299,41 @@ export default function Clientes() {
                                           alt="Relatorio Completo"
                                         />
                                       </CButton>
+
+                                      {/* <PrintComponent
+                                        onClick={() =>
+                                          dispatch(
+                                            clienteActions.show_cliente_relatorio_teste(
+                                              token,
+                                              item.id
+                                            )
+                                          )
+                                        }
+                                      /> */}
+
+                                      <CButton
+                                        style={{ marginLeft: "4px" }}
+                                        color="danger"
+                                        size="sm"
+                                        onClick={() => {
+                                          // console.log(item);
+                                          dispatch(
+                                            clienteActions.modal_destroy_cliente(
+                                              { modal: true, id: item.id }
+                                            )
+                                          );
+                                        }}
+                                      >
+                                        <CIcon name="cil-trash" alt="Delete" />
+                                      </CButton>
+
+                                      <ModalExcluir
+                                        modal_status={
+                                          rd_cliente.modal_destroy.modal
+                                        }
+                                        btn_cancelar={btn_cancel_excluir}
+                                        btn_excluir={btn_excluir}
+                                      />
                                     </td>
                                   );
                                 },
@@ -297,7 +351,7 @@ export default function Clientes() {
         </CCardBody>
       </CCard>
       <ModalClienteRelatorioTeste />
-      
+
       <ModalCliente />
       <ModalRelatorio
         modalOpen={modalOpen}
