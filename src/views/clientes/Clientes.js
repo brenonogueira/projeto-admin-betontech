@@ -130,6 +130,10 @@ export default function Clientes() {
     dispatch(clienteActions.modal_destroy_cliente({ modal: false, id: null }));
   }
 
+  const array_clientes = rd_cliente?.index?.filter(cliente => cliente.nome !== null)
+
+  console.log(array_clientes)
+
   return (
     <>
       <CCard>
@@ -153,7 +157,7 @@ export default function Clientes() {
               <CButton onClick={openModalCreate} className="bg-gray-900" variant="outline" size="lg">Adicionar Nova Ocorrência</CButton>
             </div> */}
           <CDataTable
-            items={rd_cliente?.index}
+            items={array_clientes}
             fields={fields}
             tableFilter={{ label: "Filtrar", placeholder: "o que procura?" }}
             itemsPerPageSelect={(true, { label: "Itens por Página" })}
