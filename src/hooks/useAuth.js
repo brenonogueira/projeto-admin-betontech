@@ -5,6 +5,7 @@ import userActions from "src/store/actions/userActions";
 import { api_login } from "src/services/api";
 import { useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function useAuth() {
   const dispatch = useDispatch();
@@ -16,9 +17,12 @@ export function useAuth() {
         sessionStorage.setItem('token', res.data.token);
         dispatch(authActions.login(res.data.user));
         dispatch(userActions.index_user(res.data.token)) ;
+        toast.success('Seja bem-vindo(a)!');
         <Redirect to="/dashboard" />;
       })
-      
+      .catch((err) => {
+        toast.error('Dados inválidos. Tente novamente')
+      })
     };
     
     const fn_logout = () => {
@@ -26,7 +30,6 @@ export function useAuth() {
     sessionStorage.removeItem('token');
     history.push("/login")
   };
-
 
   return {
       fn_login,

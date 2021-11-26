@@ -69,7 +69,7 @@ export default function ModalTeste({ idRelatorio }) {
     limpa_formulario();
   };
 
-  const cadastraRelatorio = () => {
+  const cadastraTeste = () => {
     console.log(formik.values);
     axios
       .post(`${teste}/${idRelatorio}`,
@@ -269,7 +269,7 @@ export default function ModalTeste({ idRelatorio }) {
                 </CFormGroup>
               </CCardBody>
               <CCardFooter style={{textAlign: 'end'}}>
-                <CButton className="bg-gray-900"  onClick={cadastraRelatorio}> CADASTRAR</CButton>
+                <CButton className="bg-gray-900"  onClick={cadastraTeste}> CADASTRAR</CButton>
               </CCardFooter>
             </CCardBody>
           </CCol>

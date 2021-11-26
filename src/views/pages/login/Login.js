@@ -62,8 +62,7 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <form onSubmit={fn_logar}>
-                    <h1>Login</h1>
-                    <p className="text-muted">Entrar</p>
+                    <h1>Entrar</h1><br/>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -116,7 +115,7 @@ const Login = () => {
                       É nosso trabalho, todos os dias, tornar cada aspecto importante da experiência 
                       do cliente um pouco melhor.
                     </p>
-                    <Link to="/register">
+                    {/* <Link to="/register">
                       <CButton
                         color="primary"
                         className="mt-3"
@@ -125,7 +124,7 @@ const Login = () => {
                       >
                         Cadastrar funiconário
                       </CButton>
-                    </Link>
+                    </Link> */}
                   </div>
                 </CCardBody>
               </CCard>

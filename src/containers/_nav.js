@@ -6,6 +6,7 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Início',
     to: '/dashboard',
+    icon: 'cil-home',
   },
   {
     _tag: 'CSidebarNavItem',
@@ -16,11 +17,16 @@ const _nav =  [
 
   {
     _tag: 'CSidebarNavItem',
+    name: 'Cadastrar Funcionário',
+    to: '/cadastro-funcionario',
+    icon: 'cil-userFollow',
+  },
+  {
+    _tag: 'CSidebarNavItem',
     name: 'Alterar Senha',
     to: '/alterar-senha',
     icon: 'cil-asterisk',
   },
- 
 
 ]
 

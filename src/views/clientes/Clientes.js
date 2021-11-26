@@ -162,7 +162,7 @@ export default function Clientes() {
             tableFilter={{ label: "Filtrar", placeholder: "o que procura?" }}
             itemsPerPageSelect={(true, { label: "Itens por Página" })}
             itemsPerPage={10}
-            hover
+            hover           
             border
             striped
             responsive
@@ -271,6 +271,7 @@ export default function Clientes() {
                               bordered
                               // sorter={true}
                               // columnFilter
+                              noItemsView={{  noItems: 'Cadastre um relatório' }}
                               responsive
                               size="sm"
                               itemsPerPage={10}

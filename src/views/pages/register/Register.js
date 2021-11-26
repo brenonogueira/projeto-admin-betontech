@@ -40,18 +40,18 @@ const Register = () => {
       email: formik.values.email_input,
       password: formik.values.password_input
     }).then((res) => {
-      toast.success('Usuário cadastrado com sucesso! Faça o login')
-      history.push('/login')
+      toast.success('Funcionário cadastrado com sucesso! ')
+      history.push('/dashboard')
     }).catch((err) => {
       toast.warning('Erro ao realizar cadastro. Tente novamente')
     })
   }
 
   return (
-    <div className="c-app c-default-layout flex-row align-items-center">
+    <div >
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="9" lg="7" xl="6">
+          <CCol md="9" lg="7" xl="12">
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>

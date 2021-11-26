@@ -7,6 +7,7 @@ const CadastroCliente = React.lazy(() => import('./views/clientes/CadastroClient
 // const Cadastro = React.lazy(() => import('./views/Cadastro/Cadastro'));
 const TabelaCliente = React.lazy(() => import('./views/clientes/TabelaCliente'));
 const TrocaSenha = React.lazy(() => import('./views/TrocarSenha/TrocarSenha'));
+const Register = React.lazy(() => import('./views/pages/register/Register'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -17,7 +18,8 @@ const routes = [
   { path: '/clientes', exact: true, name: 'Clientes', component: Clientes },
   { path: '/cadastro-cliente', exact: true, name: 'Cadastrar Cliente', component: CadastroCliente },
   // { path: '/cadastro', exact: true, name: 'Cadastro', component: Cadastro },
-  { path: '/alterar-senha', exact: true, name: 'Alteração de Senha', component: TrocaSenha }
+  { path: '/alterar-senha', exact: true, name: 'Alteração de Senha', component: TrocaSenha },
+  { path: '/cadastro-funcionario', exact: true, name: 'Registro', component: Register }
 ];
 
 export default routes;

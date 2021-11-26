@@ -123,6 +123,7 @@ export const ModalClienteRelatorioTeste = () => {
                 size="sm"
                 border
                 itemsPerPage={10}
+                noItemsView={{ noItems: 'Cadastre os testes' }}
                 pagination
                 scopedSlots={
                   {
